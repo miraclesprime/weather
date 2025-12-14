@@ -14,8 +14,8 @@ import (
 
 	"github.com/miraclesprime/weather/config"
 	"github.com/miraclesprime/weather/internal/storage"
-	"github.com/miraclesprime/weather/middleware"
 	"github.com/miraclesprime/weather/internal/weather"
+	"github.com/miraclesprime/weather/middleware"
 )
 
 func Register(app *fiber.App, cfg config.Config, store *storage.Store) {

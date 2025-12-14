@@ -1,0 +1,74 @@
+Golang Developer Test Task
+Weather Data Aggregator Service
+Overview
+Build a service that periodically fetches weather data from multiple public APIs, aggregates the information, and exposes it through a REST API using the Fiber framework.
+Requirements
+1. Core Functionality
+• Fetch weather data from at least 2 different public weather APIs (e.g., OpenWeatherMap, WeatherAPI.com)
+• Schedule data fetching every 15 minutes using a proper scheduling mechanism
+• Store and aggregate data from multiple sources
+• Provide a REST API to query the aggregated data
+2. Technical Requirements
+API Server (Fiber)
+1. Use Fiber v2 framework for REST API
+2. Implement proper middleware (logger, recover, CORS)
+3. Use Fiber's built-in features for request validation
+4. Implement proper error handling with Fiber error handlers
+5. Structure routes using route groups
+API Integration
+• Implement concurrent API calls to multiple weather services
+• Handle API rate limiting and retries with exponential backoff
+• Parse and normalize responses from different API formats
+• Handle API failures gracefully (circuit breaker pattern is a plus)
+Data Processing
+• Aggregate data from multiple sources (average temperatures, merge forecasts)
+• Cache processed results to minimize redundant API calls
+• Implement data validation and error handling
+• Store historical data (in-memory is acceptable, but persistent storage is a plus)
+Scheduling
+• Implement a robust task scheduler (using cron, ticker, or a scheduling library)
+• Ensure tasks don't overlap if previous execution is still running
+• Log execution times and any errors
+REST API Endpoints
+Implement the following endpoints using Fiber:
+GET /api/v1/weather/current?city={city_name}
+Returns current aggregated weather for specified city
+GET /api/v1/weather/forecast?city={city_name}&days={1-7}
+Returns aggregated forecast data with validated 'days' parameter
+GET /api/v1/health
+Returns service health status and last successful API fetch times
+3. Fiber-Specific Requirements
+• Use Fiber's route grouping for versioning (/api/v1)
+• Implement custom error handler for consistent error responses
+• Use Fiber middleware: Logger, Recover, and CORS
+• Implement request validation using Fiber's context methods
+• Use Fiber's built-in JSON serialization
+• Implement graceful shutdown using Fiber's Shutdown() method
+4. Configuration
+Support configuration via environment variables or config file. Example:
+FIBER_PORT=3000
+WEATHER_API_KEY=xxx
+FETCH_INTERVAL=15m
+DEFAULT_CITIES=Prague,London,NewYork
+Deliverables
+1. Source code in a Git repository (GitHub/GitLab)
+2. README with setup instructions, how to run the service, API endpoint examples with curl commands, architecture decisions, and Fiber feature choices
+3. Example .env file with required configuration
+4. go.mod and go.sum files
+Free Weather APIs
+(No Credit Card Required)
+• OpenWeatherMap: https://openweathermap.org/api (free tier available)
+• WeatherAPI.com: https://www.weatherapi.com/ (free tier available)
+• Open-Meteo: https://open-meteo.com/ (completely free, no API key needed)
+Bonus Points
+• Implement Fiber rate limiting middleware
+• Add request ID tracking across the application
+• Implement response caching using Fiber cache middleware
+• WebSocket endpoint for real-time weather updates
+• Use Fiber's template engine for a simple status page
+Notes
+• Focus on code quality over feature completeness
+• Comment complex logic
+• Consider production scenarios (concurrent requests, memory leaks, etc.)
+• Show understanding of Fiber's performance characteristics
+
